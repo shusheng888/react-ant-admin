@@ -51,7 +51,7 @@ const LayoutHeader = ({ userInfo, clearStateUser, children }) => {
     <Header className="header">
       <div className="logo">
         <img src={logo} alt="logo"></img>
-        <span>react-ant-admin</span>
+        <span>刘成帅哥专用</span>
       </div>
       {children}
       <div className="right">

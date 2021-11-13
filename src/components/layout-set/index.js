@@ -73,52 +73,55 @@ function LayoutSet(props) {
     useLayoutSet(props);
   const { componentsVisible = {}, setCompVisible } = props;
   return (
-    <div className="layoutset-container">
-      <MyIcon type="icon_setting" onClick={wakeup} />
-      <Drawer
-        className="layoutset-drawer"
-        title="设置布局"
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        width={300}
-        visible={visible}
-      >
-        <h2 className="title">选择布局</h2>
-        <Row justify="space-around">
-          {modes.map((m) => (
-            <div
-              key={m.mode}
-              onClick={() => setLayout(m.mode)}
-              className={m.mode === props.layoutMode ? "col active" : "col"}
-            >
-              <img src={m.img} alt={m.alt}></img>
-            </div>
-          ))}
-        </Row>
-        <h2 className="title">组件显示</h2>
-        {Object.keys(componentsVisible).map((key) => (
-          <Row key={key} className="visibel-list">
-            {key === "footer" ? "底部：" : "顶部切换导航："}
-            <Radio.Group
-              onChange={(e) => setCompVisible(key, e.target.value)}
-              value={componentsVisible[key]}
-            >
-              {RadioArray.map((i) => (
-                <Radio value={i.v} key={i.l}>
-                  {i.l}
-                </Radio>
-              ))}
-            </Radio.Group>
-          </Row>
-        ))}
-        <Row className="save" justify="center">
-          <Button type="primary" onClick={saveLayout}>
-            保存此布局
-          </Button>
-        </Row>
-      </Drawer>
-    </div>
+    // <div className="layoutset-container">
+    //   <MyIcon type="icon_setting" onClick={wakeup} />
+    //   <Drawer
+    //     className="layoutset-drawer"
+    //     title="设置布局"
+    //     placement="right"
+    //     closable={false}
+    //     onClose={onClose}
+    //     width={300}
+    //     visible={visible}
+    //   >
+    //     <h2 className="title">选择布局</h2>
+    //     <Row justify="space-around">
+    //       {modes.map((m) => (
+    //         <div
+    //           key={m.mode}
+    //           onClick={() => setLayout(m.mode)}
+    //           className={m.mode === props.layoutMode ? "col active" : "col"}
+    //         >
+    //           <img src={m.img} alt={m.alt}></img>
+    //         </div>
+    //       ))}
+    //     </Row>
+    //     <h2 className="title">组件显示</h2>
+    //     {Object.keys(componentsVisible).map((key) => (
+    //       <Row key={key} className="visibel-list">
+    //         {key === "footer" ? "底部：" : "顶部切换导航："}
+    //         <Radio.Group
+    //           onChange={(e) => setCompVisible(key, e.target.value)}
+    //           value={componentsVisible[key]}
+    //         >
+    //           {RadioArray.map((i) => (
+    //             <Radio value={i.v} key={i.l}>
+    //               {i.l}
+    //             </Radio>
+    //           ))}
+    //         </Radio.Group>
+    //       </Row>
+    //     ))}
+    //     <Row className="save" justify="center">
+    //       <Button type="primary" onClick={saveLayout}>
+    //         保存此布局
+    //       </Button>
+    //     </Row>
+    //   </Drawer>
+    // </div>
+
+    //把布局注释掉
+    <div></div>
   );
 }
 

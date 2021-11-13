@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import { filterOpenKey } from "@/store/menu/action";
 import {  reduceMenuList } from "@/utils";
 import { message, Breadcrumb } from "antd";
-import { getMenus } from "@/common";
+import {getMenus} from '@/common'
 
 const mapStateToProps = (state) => ({
   openedMenu: state.menu.openedMenu,

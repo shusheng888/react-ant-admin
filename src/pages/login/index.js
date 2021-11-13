@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import { connect } from "react-redux";
 import MyIcon from "@/components/icon";
-import { saveUser, getLocalUser, saveToken } from "@/utils";
+import { saveUser, getLocalUser,handelLogin } from "@/utils";
 import { setUserInfoAction } from "@/store/user/action";
 import { login } from "@/api";
 import "./index.less";
@@ -28,18 +28,20 @@ function useLogin(setUserInfo) {
   const [btnLoad, setBtnLoad] = useState(false);
   const onFinish = (values) => {
     setBtnLoad(true);
-    login(values)
+
+    login(handelLogin(values))
       .then((res) => {
-        const { data, msg, status, token } = res;
+        const { code, msg, } = res;
         setBtnLoad(false);
-        if (status === 1) return;
-        saveToken(token);
-        data.isLogin = true;
-        message.success(msg);
-        if (values.remember) {
-          saveUser(data);
+        if (code !== 0) {
+          message.error(msg)
+          return
         }
-        setUserInfo(data);
+        message.success(msg);
+        if (values.rememberMe) {
+          saveUser(values);
+        }
+        setUserInfo(values);
       })
       .catch(() => {
         setBtnLoad(false);
@@ -63,21 +65,21 @@ function Login({ setUserInfo }) {
           }}
           onFinish={onFinish}
         >
-          <Form.Item name="account" rules={IPT_RULE_USERNAME}>
+          <Form.Item name="username" rules={IPT_RULE_USERNAME}>
             <Input
               prefix={<MyIcon type="icon_nickname" />}
-              placeholder="账号:admin/user"
+              placeholder="账号:admin"
             />
           </Form.Item>
-          <Form.Item name="pswd" rules={IPT_RULE_PASSWORD}>
+          <Form.Item name="password" rules={IPT_RULE_PASSWORD}>
             <Input
               prefix={<MyIcon type="icon_locking" />}
               type="password"
-              placeholder="密码:admin123/user123"
+              placeholder="密码:admin123"
             />
           </Form.Item>
           <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Form.Item name="rememberMe" valuePropName="checked" noStyle>
               <Checkbox>记住我</Checkbox>
             </Form.Item>
           </Form.Item>

@@ -8,16 +8,6 @@ function getMenus() {
     if (localMenu) {
       return res(localMenu);
     }
-    getMenu()
-      .then((result) => {
-        if (result) {
-          saveLocalMenu(result);
-          res(result);
-        }
-      })
-      .catch((err) => {
-        res({ data: [], mapKey: [], type: [] });
-      });
   });
 }
 

@@ -132,6 +132,9 @@ function getCompVisibel() {
 function setCompVisibel(val) {
   return setKey(true, VISIBEL, val);
 }
+function handelLogin(userInfo){
+  return `username=${userInfo.username}&password=${userInfo.password}&rememberMe=${(!!userInfo.rememberMe)}`
+}
 export {
   getDefaultMenu,
   getSessionUser,
@@ -153,4 +156,5 @@ export {
   clearLocalDatas,
   getCompVisibel,
   setCompVisibel,
+  handelLogin,
 };

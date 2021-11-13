@@ -1,12 +1,15 @@
 import React, { useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Layout, Menu, Button, Affix, Col } from "antd";
+import { Layout, Menu, Button, Affix, Col,Breadcrumb } from "antd";
 import MyIcon from "@/components/icon";
 import { setOpenKey } from "@/store/action";
 import { stopPropagation } from "@/utils";
 import * as layoutTypes from "@/store/layout/actionTypes";
-const { Sider } = Layout;
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import Table from "@pages/table";
+
+const { Header, Content,Sider } = Layout;
 const { SubMenu } = Menu;
 
 const mapDispatchToProps = (dispatch) => ({
@@ -31,10 +34,10 @@ const SliderContent = ({ children }) => {
       <Sider width={200} collapsed={collapsed} className="">
         {children}
         <div className="fold-control fixed">
-          <Button onClick={toggleCollapsed}>
-            {collapsed ? "展开" : "收起"}
-            <MyIcon type={collapsed ? "icon_next" : "icon_back"} />
-          </Button>
+          {/*<Button onClick={toggleCollapsed}>*/}
+          {/*  {collapsed ? "展开" : "收起"}*/}
+          {/*  <MyIcon type={collapsed ? "icon_next" : "icon_back"} />*/}
+          {/*</Button>*/}
         </div>
       </Sider>
     </Affix>
@@ -88,6 +91,13 @@ const SiderMenu = ({
 
   const WrapContainer =
     layout === layoutTypes.SINGLE_COLUMN ? FlexBox : SliderContent;
+  const _chooseSize=()=>{
+    console.log('【 size】', 111111)
+    // return <Table/>
+  }
+  const _chooseDouble =()=>{
+    console.log('【 double】', 222222)
+  }
   return (
     <WrapContainer>
       <Menu
@@ -102,10 +112,26 @@ const SiderMenu = ({
         openKeys={openKeys}
         selectedKeys={selectedKeys}
       >
-        {menuComponent}
+        {/*{menuComponent}*/}
+          <Layout>
+            <Sider width={200} className="site-layout-background">
+              <Menu
+                mode="inline"
+                defaultSelectedKeys={['1']}
+                defaultOpenKeys={['sub1']}
+                style={{ height: '100%', borderRight: 0 }}
+              >
+                <SubMenu key="sub1" icon={<UserOutlined />} title="管理页面">
+                  <Menu.Item key="1" onClick={_chooseSize}>大小</Menu.Item>
+                  <Menu.Item key="2"onClick={_chooseDouble}>二串一</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </Sider>
+          </Layout>
       </Menu>
     </WrapContainer>
   );
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SiderMenu);
